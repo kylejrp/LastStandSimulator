@@ -13,11 +13,15 @@ namespace LastStandSimulator
             int numberOfSimulations = 1_000_000;
 
 
-            var ourCount = 26;
-            var enemyCounts = new int[] { 8, 31, 43, 8 };
+            var ourCount = 19;
+            var enemyCounts = new int[] { 50, 58 };
+
+            var ourCount2 = 36;
+            var enemyCounts2 = new int[] { 8, 33, 31, 2, 32, 10 };
 
             Console.WriteLine("Running simulations for the following attack:");
             Console.WriteLine("Fighting: " + ourCount + " --> [" + string.Join(", ", enemyCounts) + "]");
+            Console.WriteLine("Fighting: " + ourCount2 + " --> [" + string.Join(", ", enemyCounts2) + "]");
 
 
             for (int i = 0; i < numberOfSimulations; i++)
@@ -26,7 +30,18 @@ namespace LastStandSimulator
                 //Console.WriteLine("Won? " + result.weWon);
                 //Console.WriteLine("    Our Count   : " + result.ourCount);
                 //Console.WriteLine("    Their Counts: [" + string.Join(", ", result.enemyCounts) + "]");
-                if (result.weWon)
+                if (result.enemyCounts[0] > 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    enemyCounts2[5] = enemyCounts[1];
+                }
+
+                var result2 = SimulateRound(ourCount2, new List<int>(enemyCounts2).ToArray());
+
+                if (result2.weWon)
                 {
                     winCount++;
                 }
